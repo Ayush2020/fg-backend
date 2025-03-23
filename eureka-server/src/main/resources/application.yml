@@ -1,0 +1,13 @@
+server:
+  port: 8761  # Eureka Server runs on port 8761
+
+spring:
+  application:
+    name: eureka-server  # Name of the service
+
+eureka:
+  client:
+    register-with-eureka: false  # This service itself is the registry
+    fetch-registry: false  # No need to fetch other instances
+  server:
+    wait-time-in-ms-when-sync-empty: 0  # Avoid startup delays

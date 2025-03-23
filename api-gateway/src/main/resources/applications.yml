@@ -1,0 +1,36 @@
+server:
+  port: 8080  # API Gateway runs on port 8080
+
+spring:
+  application:
+    name: api-gateway  # Name of the service
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true  # Enables service discovery for dynamic routing
+      routes:
+        - id: search-service
+          uri: lb://SEARCH-SERVICE
+          predicates:
+            - Path=/search/**
+
+        - id: fare-service
+          uri: lb://FARE-SERVICE
+          predicates:
+            - Path=/fare/**
+
+        - id: booking-service
+          uri: lb://BOOKING-SERVICE
+          predicates:
+            - Path=/booking/**
+
+        - id: checkin-service
+          uri: lb://CHECKIN-SERVICE
+          predicates:
+            - Path=/checkin/**
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
